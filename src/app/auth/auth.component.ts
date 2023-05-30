@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthResponseData, AuthService } from './auth.service';
 import { Observable } from 'rxjs-compat';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +12,7 @@ export class AuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -36,7 +37,7 @@ export class AuthComponent implements OnInit {
     authObs.subscribe(
       (res) => {
         this.isLoading = false;
-        console.log(res);
+        this.router.navigate(['/recipes']);
       },
       (error) => {
         this.error = error;
